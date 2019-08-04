@@ -1,17 +1,17 @@
+//vars
 var Rthumb = 0
 var Lthumb = 0
 var Points;
 var tbody = document.getElementById("tbody"), row, cell1, cell2
+
+//needed functions from own library
 function sortTable(tbody, index, ascending) {
     Array.prototype.slice.call(tbody.children).sort(
         (tr1, tr2) => tr1.children[index].textContent.localeCompare(tr2.children[index].textContent) * (ascending ? 1 : -1)
         ).forEach(tr => tbody.appendChild(tr));
 }
-function round(value, precision) {
-    var multiplier = Math.pow(10, precision || 0);
-    return Math.round(value * multiplier) / multiplier;
-}
 
+//actual script
 function printvalue() {
 document.getElementById("tbody").innerHTML = ""
 var alg = document.getElementById("algtest").value.split("\n")
@@ -21,21 +21,18 @@ for (var i=0; i<alg.length; i=i+1){
     Lthumb = 0
 	var turns = alg[i].split(" ")
 	for (var j=0; j<turns.length; j=j+1){
-		if (turns[0] != "Searching"){
 		move(turns[j])
-		}
 	}
     	//add to the table
 	if (Points != 0) {
-	round(Points, 1)
     row = tbody.insertRow()
     cell1 = row.insertCell()
     cell1.innerHTML = alg[i]
     cell2 = row.insertCell()
     cell2.innerHTML = Points
-    sortTable(document.querySelector("tbody"), 1, true);
 	}
 }
+sortTable(document.querySelector("tbody"), 1, true);
 }
 
 function move(turn) {
@@ -142,6 +139,6 @@ else if (Rthumb == 3 && Lthumb == 0) {
 	}
 }
 else if (Rthumb == 2) {
-Points += 10
+Points += 3
 }
 }

@@ -1,6 +1,7 @@
 //vars
 var Rthumb = 0
 var Lthumb = 0
+var lastMove = ""
 var Points;
 var turns;
 var tbody = document.getElementById("tbody"), row, cell1, cell2
@@ -13,6 +14,7 @@ function sortTable(tbody, index, ascending) {
 }
 
 //actual script
+
 function printvalue() {
 document.getElementById("tbody").innerHTML = ""
 var algs = document.getElementById("algtest").value.split("\n")
@@ -62,13 +64,20 @@ if (Rthumb == 0 && Lthumb == 0) {
     	Points += 7
 	break;
     case "F":
-    	Points += 14
+    	if (lastMove == "R'" || lastMove == "R") {
+        	Points += 11;
+        } else {
+    		Points += 15;
+        }
 	break;
     case "F'":
-    	Points += 11
+    	if (lastMove == "R") {
+        	Points += 10;
+        } else {
+    	Points += 14}
 	break;
     case "F2":
-    	Points += 20
+    	Points += 22
 	break;
     case "D":
     	Points += 5
@@ -95,7 +104,7 @@ else if (Rthumb == 1 && Lthumb == 0) {
 		Points += 9
 	break;
     case "U":
-    	Points += 9
+    	Points += 6
 	break;
     case "U'":
     	Points += 5
@@ -107,7 +116,11 @@ else if (Rthumb == 1 && Lthumb == 0) {
     	Points += 17
 	break;
     case "F'":
-    	Points += 9
+    	if (lastMove == "R") {
+            	Points += 9
+        } else {
+        	Points += 14;
+        }
 	break;
     case "F2":
     	Points += 19
@@ -138,7 +151,7 @@ else if (Rthumb == 3 && Lthumb == 0) {
 		Points += 8
 	break;
     case "U":
-    	Points += 6
+    	Points += 7
 	break;
     case "U'":
     	Points += 5
@@ -153,7 +166,7 @@ else if (Rthumb == 3 && Lthumb == 0) {
     	Points += 8
 	break;
     case "F2":
-    	Points += 8
+    	Points += 7
 	break;
     case "D":
     	Points += 5
@@ -170,42 +183,43 @@ else if (Rthumb == 2) {
 Rthumb = 0
 	switch(turn) {
     case "R":
-        Points += 10
+        Points += 20
 	break;
     case "R'":
-        Points += 10
+        Points += 20
 	break;
 	case "R2":
-		Points += 10
+		Points += 20
 	break;
     case "U":
-    	Points += 10
+    	Points += 20
 	break;
     case "U'":
-    	Points += 10
+    	Points += 20
 	break;
 	case "U2":
-    	Points += 10
+    	Points += 20
 	break;
     case "F":
-    	Points += 10
+    	Points += 20
 	break;
     case "F'":
-    	Points += 10
+    	Points += 20
 	break;
     case "F2":
-    	Points += 10
+    	Points += 20
 	break;
     case "D":
-    	Points += 10
+    	Points += 20
 	break;
     case "D'":
-    	Points += 10
+    	Points += 20
 	break;
     case "D2":
-    	Points += 10
+    	Points += 20
 	break;
 	}
 move(turn)
 }
+lastMove = turn;
 }
